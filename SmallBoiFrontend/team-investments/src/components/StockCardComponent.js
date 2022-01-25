@@ -8,17 +8,18 @@ export default function StockCardComponent(props){
     var classes = useStyles();
     var mockList=[
         {
-            Name:"APL",
-            Cost:256
+            T:"APL",
+            C:256
         },
         {
-            Name:"ABNB",
-            Cost:25.4
+            T:"ABNB",
+            C:25.4
         }
     ];
     return (
-        <>
+        <div className={classes.NextTo}>
         {mockList.map((item) => (
+            
         <Box
         sx={{
           display: 'flex',
@@ -31,12 +32,20 @@ export default function StockCardComponent(props){
         }}
       >
         <Paper elevation={5}>
-        <div>{item.Name}</div>
-        <div>{item.Cost}</div>
+            <div className={classes.NextTo}>
+            Ticker :
+        <div className={classes.StockName} >{item.T}</div>
+        </div>
+        <div className={classes.NextTo}>
+            Cost :
+        <div className={classes.StockName} >{item.C}</div>
+        </div>
+        <div className={classes.NextTo}>
         <Button variant="outlined" className={classes.InvestButton}>Invest</Button>
+        </div>
         </Paper> 
       </Box>
       ))}
-      </>
+      </div>
     );
 }
