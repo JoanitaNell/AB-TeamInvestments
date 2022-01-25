@@ -2,10 +2,12 @@ import { makeStyles } from "@material-ui/styles";
 
 export default makeStyles(theme => ({
 
-  StockCardBorder:{
+  InvestButton:{
     borderRadius: 25,
-    width: 36,
-    backgroundColor: "red",
+    width:70,
+    backgroundColor: "#1C78AB",
+    color:"white",
+    textAlign:"center"
   },
   HeaderComponentStyle:{
     width:"100%",
