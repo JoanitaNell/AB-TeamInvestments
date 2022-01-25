@@ -1,4 +1,9 @@
+using Microsoft.EntityFrameworkCore;
+
 var builder = WebApplication.CreateBuilder(args);
+var connectionString = "Server=tcp:sql-teaminvestmentsserver.database.windows.net,1433;Initial Catalog=sqldb-TeamInvestments;Persist Security Info=False;User ID=bigboi;Password=Password25;MultipleActiveResultSets=False;Encrypt=True;TrustServerCertificate=False;Connection Timeout=30;";
+builder.Services.AddDbContext<BigBoiDbContext>(x => x.UseSqlServer(connectionString));
+
 
 // Add services to the container.
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
@@ -15,45 +20,66 @@ var app = builder.Build();
 
 app.UseHttpsRedirection();
 
-var summaries = new[]
-{
-    "Freezing", "Bracing", "Chilly", "Cool", "Mild", "Warm", "Balmy", "Hot", "Sweltering", "Scorching"
-};
 
-app.MapGet("/weatherforecast", () =>
+app.MapGet("/getCurrentInvestmentsTokenValues", async (BigBoiDbContext _dbContext) =>
 {
-    var forecast = Enumerable.Range(1, 5).Select(index =>
-       new WeatherForecast
-       (
-           DateTime.Now.AddDays(index),
-           Random.Shared.Next(-20, 55),
-           summaries[Random.Shared.Next(summaries.Length)]
-       ))
-        .ToArray();
-    return forecast;
 })
-.WithName("GetWeatherForecast");
+.WithName("GetCurrentInvestmentsTokenValues");
+
+app.MapGet("/investments", async () =>
+{
+    var client = new HttpClient();
+    var response = await client.GetAsync("https://api.polygon.io/v2/aggs/grouped/locale/us/market/stocks/2020-10-13?adjusted=true&apiKey=Ac4_m0hts4xdgGfRhkGisL803PyGyWXY");
+    var results= Newtonsoft.Json.JsonConvert.DeserializeObject<Results>(await response.Content.ReadAsStringAsync());
+    var investments = new List<Invest>();
+    for (int i = 0; i < 10; i++)
+    {
+        var inv = new Invest()
+        {
+            T= results.results[i].T,
+            c= results.results[i].c,
+        };
+        investments.Add(inv);
+    }
+    return investments;
+})
+.WithName("Investments");
+
+app.MapPost("/newInvestment", async (InvestmentDetails investment, BigBoiDbContext _dbContext) => 
+{
+})
+.WithName("NewInvestment");
+
+app.MapPut("/updateInvestmentTokenValue{investmentName}", async (string investmentName, BigBoiDbContext _dbContext) => 
+{
+})
+.WithName("UpdateInvestmentTokenValue");
 
 app.Run();
 
-internal record WeatherForecast(DateTime Date, int TemperatureC, string? Summary)
-{
-    public int TemperatureF => 32 + (int)(TemperatureC / 0.5556);
-}
 
-
-public class User
-{
-    public string Name { get; set; }
-    public string Email { get; set; }
-    public bool IsLoggedIn { get; set; }
-    public int TokenBalance { get; set; }
-}
 
 
 public class CurrentInvestments
 {
-    public string UserName { get; set; }
     public string StockName { get; set; }
     public int TokenValue { get; set; }
+}
+
+
+public class InvestmentDetails
+{
+
+}
+
+
+public class Invest
+{
+    public string T { get; set; }
+    public float c { get; set; }
+}
+
+public class Results
+{
+    public List<Invest> results { get; set;}
 }

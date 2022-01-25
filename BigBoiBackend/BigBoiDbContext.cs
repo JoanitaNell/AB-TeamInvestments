@@ -9,7 +9,6 @@ public class BigBoiDbContext: DbContext
 
 	}
 
-	public DbSet<User> Users { get; set; }
 	public DbSet<CurrentInvestments> CurrentInvestments { get; set;}
 
 	protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
