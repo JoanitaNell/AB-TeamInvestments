@@ -1,4 +1,5 @@
 using Microsoft.EntityFrameworkCore;
+using System.ComponentModel.DataAnnotations;
 
 var builder = WebApplication.CreateBuilder(args);
 var connectionString = "Server=tcp:sql-teaminvestmentsserver.database.windows.net,1433;Initial Catalog=sqldb-TeamInvestments;Persist Security Info=False;User ID=bigboi;Password=Password25;MultipleActiveResultSets=False;Encrypt=True;TrustServerCertificate=False;Connection Timeout=30;";
@@ -21,10 +22,11 @@ var app = builder.Build();
 app.UseHttpsRedirection();
 
 
-app.MapGet("/getCurrentInvestmentsTokenValues", async (BigBoiDbContext _dbContext) =>
+app.MapGet("/getCurrentInvestments", async (BigBoiDbContext _dbContext) =>
 {
+    return _dbContext.CurrentInvestments;
 })
-.WithName("GetCurrentInvestmentsTokenValues");
+.WithName("GetCurrentInvestments");
 
 app.MapGet("/investments", async () =>
 {
@@ -45,13 +47,19 @@ app.MapGet("/investments", async () =>
 })
 .WithName("Investments");
 
-app.MapPost("/newInvestment", async (InvestmentDetails investment, BigBoiDbContext _dbContext) => 
+app.MapPost("/newInvestment", async (Invest investment, BigBoiDbContext _dbContext) => 
 {
+    _dbContext.Add(investment);
+    _dbContext.SaveChanges();
 })
 .WithName("NewInvestment");
 
-app.MapPut("/updateInvestmentTokenValue{investmentName}", async (string investmentName, BigBoiDbContext _dbContext) => 
+app.MapPut("/updateInvestmentTokenValue{investmentName}/{tokenValue}", async (string investmentName,float tokenValue, BigBoiDbContext _dbContext) => 
 {
+    var inv = await _dbContext.CurrentInvestments.FindAsync(investmentName);
+    inv.c = tokenValue;
+    await _dbContext.SaveChangesAsync();
+
 })
 .WithName("UpdateInvestmentTokenValue");
 
@@ -60,21 +68,10 @@ app.Run();
 
 
 
-public class CurrentInvestments
-{
-    public string StockName { get; set; }
-    public int TokenValue { get; set; }
-}
-
-
-public class InvestmentDetails
-{
-
-}
-
 
 public class Invest
 {
+    [Key]
     public string T { get; set; }
     public float c { get; set; }
 }
