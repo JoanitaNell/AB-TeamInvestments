@@ -14,5 +14,12 @@ export default makeStyles(theme => ({
     height:"20%",
     colour:"#D4D7D7"
   },
+  StockName:{
+    fontSize:25,
+  },
+  NextTo:{
+    justifyContent:"center",
+    display:"flex",
+  }
  
 }));
