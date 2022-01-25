@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\JoanitaNell\\Desktop\\Bootcamp\\Week Two\\25 January\\BigBoiBackend\\BigBoiBackend.csproj": {}
+    "C:\\Users\\JoanitaNell\\Desktop\\Bootcamp\\Week Two\\25 January\\AB-TeamInvestments\\BigBoiBackend\\BigBoiBackend.csproj": {}
   },
   "projects": {
-    "C:\\Users\\JoanitaNell\\Desktop\\Bootcamp\\Week Two\\25 January\\BigBoiBackend\\BigBoiBackend.csproj": {
+    "C:\\Users\\JoanitaNell\\Desktop\\Bootcamp\\Week Two\\25 January\\AB-TeamInvestments\\BigBoiBackend\\BigBoiBackend.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\JoanitaNell\\Desktop\\Bootcamp\\Week Two\\25 January\\BigBoiBackend\\BigBoiBackend.csproj",
+        "projectUniqueName": "C:\\Users\\JoanitaNell\\Desktop\\Bootcamp\\Week Two\\25 January\\AB-TeamInvestments\\BigBoiBackend\\BigBoiBackend.csproj",
         "projectName": "BigBoiBackend",
-        "projectPath": "C:\\Users\\JoanitaNell\\Desktop\\Bootcamp\\Week Two\\25 January\\BigBoiBackend\\BigBoiBackend.csproj",
+        "projectPath": "C:\\Users\\JoanitaNell\\Desktop\\Bootcamp\\Week Two\\25 January\\AB-TeamInvestments\\BigBoiBackend\\BigBoiBackend.csproj",
         "packagesPath": "C:\\Users\\JoanitaNell\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\JoanitaNell\\Desktop\\Bootcamp\\Week Two\\25 January\\BigBoiBackend\\obj\\",
+        "outputPath": "C:\\Users\\JoanitaNell\\Desktop\\Bootcamp\\Week Two\\25 January\\AB-TeamInvestments\\BigBoiBackend\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\JoanitaNell\\AppData\\Roaming\\NuGet\\NuGet.Config",
@@ -40,6 +40,28 @@
         "net6.0": {
           "targetAlias": "net6.0",
           "dependencies": {
+            "Azure.Core": {
+              "target": "Package",
+              "version": "[1.22.0, )"
+            },
+            "Microsoft.EntityFrameworkCore": {
+              "target": "Package",
+              "version": "[6.0.1, )"
+            },
+            "Microsoft.EntityFrameworkCore.SqlServer": {
+              "target": "Package",
+              "version": "[6.0.1, )"
+            },
+            "Microsoft.EntityFrameworkCore.Tools": {
+              "include": "Runtime, Build, Native, ContentFiles, Analyzers, BuildTransitive",
+              "suppressParent": "All",
+              "target": "Package",
+              "version": "[6.0.1, )"
+            },
+            "Newtonsoft.Json": {
+              "target": "Package",
+              "version": "[13.0.1, )"
+            },
             "Swashbuckle.AspNetCore": {
               "target": "Package",
               "version": "[6.2.3, )"

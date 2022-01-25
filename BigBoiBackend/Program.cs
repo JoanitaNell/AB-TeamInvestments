@@ -40,3 +40,20 @@ internal record WeatherForecast(DateTime Date, int TemperatureC, string? Summary
 {
     public int TemperatureF => 32 + (int)(TemperatureC / 0.5556);
 }
+
+
+public class User
+{
+    public string Name { get; set; }
+    public string Email { get; set; }
+    public bool IsLoggedIn { get; set; }
+    public int TokenBalance { get; set; }
+}
+
+
+public class CurrentInvestments
+{
+    public string UserName { get; set; }
+    public string StockName { get; set; }
+    public int TokenValue { get; set; }
+}
