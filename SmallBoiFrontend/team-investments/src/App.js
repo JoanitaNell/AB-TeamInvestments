@@ -1,12 +1,15 @@
-import logo from './logo.svg';
 import './App.css';
+import useStyles from "./AppStyle";
 
 import StockCardComponent from './components/StockCardComponent';
+import HeaderComponent from './components/HeaderComponent';
 
 function App() {
+  var classes = useStyles();
+
   return (
-    <div className="App">
-      Team Investments
+    <div className={classes.ParentContainer}>
+      <HeaderComponent/>
       <StockCardComponent/>
     </div>
   );

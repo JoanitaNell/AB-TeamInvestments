@@ -2,10 +2,10 @@ import { makeStyles } from "@material-ui/styles";
 
 export default makeStyles(theme => ({
 
-  StockCardBorder:{
-    borderRadius: 25,
-    width: 36,
-    backgroundColor: "red",
+  ParentContainer:{
+      backgroundColor:"#E7EBF0",
+      width:"100vw",
+      height:"100vh",
   }
  
 }));
