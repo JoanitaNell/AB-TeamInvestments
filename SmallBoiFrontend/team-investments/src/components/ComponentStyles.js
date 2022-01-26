@@ -20,6 +20,11 @@ export default makeStyles(theme => ({
   NextTo:{
     justifyContent:"center",
     display:"flex",
-  }
+  },
+  NextToStockCard:{
+    justifyContent:"center",
+    display:"flex",
+    overflowWrap:"break-word"
+  },
  
 }));

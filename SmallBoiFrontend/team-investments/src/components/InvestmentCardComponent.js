@@ -4,7 +4,7 @@ import Paper from '@mui/material/Paper';
 import Box from '@mui/material/Box';
 import Button from '@mui/material/Button';
 
-export default function StockCardComponent(props){
+export default function InvestmentCardComponent(props){
     var classes = useStyles();
     var [resultData, setResultData]= useState([
         {
@@ -19,7 +19,7 @@ export default function StockCardComponent(props){
 
     useEffect(() => {
         /**load recommendations */
-        fetch("https://bigboibackend20220125131300.azurewebsites.net/investments")
+        fetch("https://bigboibackend20220125131300.azurewebsites.net/getCurrentInvestments")
           .then(res => res.json())
           .then(
             (result) => {
@@ -27,7 +27,7 @@ export default function StockCardComponent(props){
               setResultData(result);
             },
           )
-      }, [])
+      })
 
     return (
         <div className={classes.NextTo}>
@@ -39,13 +39,13 @@ export default function StockCardComponent(props){
           flexWrap: 'wrap',
           '& > :not(style)': {
             m: 1,
-            width: 250,
-            height: 150,
+            width: 350,
+            height: 200,
           },
         }}
       >
         <Paper elevation={5}>
-            <div className={classes.NextToStockCard}>
+            <div className={classes.NextTo}>
             Ticker :
         <div className={classes.StockName} >{item.t}</div>
         </div>
@@ -53,9 +53,7 @@ export default function StockCardComponent(props){
             Cost :
         <div className={classes.StockName} >{item.c}</div>
         </div>
-        <div className={classes.NextTo}>
-        <Button variant="outlined" className={classes.InvestButton}>Invest</Button>
-        </div>
+      
         </Paper> 
       </Box>
       ))}
